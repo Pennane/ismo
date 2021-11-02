@@ -21,7 +21,7 @@ export default async function (interaction: Discord.CommandInteraction<Discord.C
     await interaction.reply({ content: 'diu-da-da-diu-bau!', ephemeral: true })
 
     const voiceChannel = (interaction.member as Discord.GuildMember).voice.channel
-    if (!voiceChannel) return
+    if (!voiceChannel || !voiceChannel.joinable) return
 
     const player = createAudioPlayer()
     const connection = joinVoiceChannel({
