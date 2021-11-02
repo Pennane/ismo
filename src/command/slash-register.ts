@@ -19,8 +19,8 @@ const slashCommand = new SlashCommandBuilder()
 export const register = async () => {
     console.info('Started refreshing application (/) commands.')
     try {
-        await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: [slashCommand] })
-        await rest.put(Routes.applicationCommands(clientId), { body: [] })
+        // await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: [slashCommand] })
+        await rest.put(Routes.applicationCommands(clientId), { body: [slashCommand] })
     } catch (e) {
         console.error(e)
         return

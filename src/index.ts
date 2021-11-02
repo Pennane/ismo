@@ -6,7 +6,7 @@ import { TOKEN } from './config'
 const intents = new Intents([Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES])
 const client = new Discord.Client({ intents })
 
-// register()
+register()
 
 client.on('ready', () => console.info('Client ready'))
 
