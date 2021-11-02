@@ -1,5 +1,5 @@
 import Discord from 'discord.js'
-import { VoiceConnectionStatus, joinVoiceChannel, createAudioPlayer } from '@discordjs/voice'
+import { joinVoiceChannel, createAudioPlayer } from '@discordjs/voice'
 import { ismoConnections } from '../storage'
 import { handleStart, handleEnd } from './eventHandle'
 
@@ -11,7 +11,10 @@ export default async function (interaction: Discord.CommandInteraction<Discord.C
 
     if (subCommand === 'lopeta') {
         storedIsmoConnection?.connection.destroy()
+        storedIsmoConnection?.connection.receiver.speaking.removeAllListeners()
+
         ismoConnections.delete(interaction.guild.id)
+
         await interaction.reply({ content: 'bye-by-be-bye-bye!', ephemeral: true })
         return
     }
@@ -21,9 +24,19 @@ export default async function (interaction: Discord.CommandInteraction<Discord.C
     await interaction.reply({ content: 'diu-da-da-diu-bau!', ephemeral: true })
 
     const voiceChannel = (interaction.member as Discord.GuildMember).voice.channel
-    if (!voiceChannel || !voiceChannel.joinable) return
+
+    if (!voiceChannel) {
+        await interaction.reply({ content: 'lii-ty--ää-ni--ka-na-val-le--en-sin!', ephemeral: true })
+        return
+    }
+
+    if (!voiceChannel.joinable) {
+        await interaction.reply({ content: 'sin-ne--en--lii-ty!', ephemeral: true })
+        return
+    }
 
     const player = createAudioPlayer()
+
     const connection = joinVoiceChannel({
         guildId: voiceChannel.guild.id,
         channelId: voiceChannel.id,
@@ -32,8 +45,9 @@ export default async function (interaction: Discord.CommandInteraction<Discord.C
     })
 
     connection.subscribe(player)
-
     const speakingMap: Map<string, boolean> = new Map()
+
+    // Reset the ismoconnection every execution of the slash command
     ismoConnections.set(interaction.guild.id, { connection, speakingMap, player })
 
     const target = interaction.options.get('kohde')

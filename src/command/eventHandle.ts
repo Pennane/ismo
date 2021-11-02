@@ -1,6 +1,5 @@
 import { AudioPlayerStatus, createAudioResource } from '@discordjs/voice'
 import Discord from 'discord.js'
-import { Message } from 'discord.js'
 import { soundfile } from '../config'
 import { ismoConnections } from '../storage'
 import { anySpeaking } from '../util'
