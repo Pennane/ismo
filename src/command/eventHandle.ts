@@ -4,7 +4,7 @@ import { soundfile } from '../config'
 import { ismoConnections } from '../storage'
 import { anySpeaking } from '../util'
 
-export const handleSpeakingStart = (interaction: Discord.CommandInteraction<Discord.CacheType>, id: string) => {
+export const handleSpeakingStart = (id: string, interaction: Discord.CommandInteraction<Discord.CacheType>) => {
     if (!interaction.guild) return
 
     const ismoConnection = ismoConnections.get(interaction.guild.id)
@@ -23,7 +23,7 @@ export const handleSpeakingStart = (interaction: Discord.CommandInteraction<Disc
     ismoConnection.speakingMap.set(id, true)
 }
 
-export const handleSpeakingEnd = (interaction: Discord.CommandInteraction<Discord.CacheType>, id: string) => {
+export const handleSpeakingEnd = (id: string, interaction: Discord.CommandInteraction<Discord.CacheType>) => {
     if (!interaction.guild) return
 
     const ismoConnection = ismoConnections.get(interaction.guild.id)

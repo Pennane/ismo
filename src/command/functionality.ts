@@ -51,12 +51,12 @@ export default async function (interaction: Discord.CommandInteraction<Discord.C
 
     connection.receiver.speaking.on('start', (id) => {
         if (target && id !== target.user?.id) return
-        handleSpeakingStart(interaction, id)
+        handleSpeakingStart(id, interaction)
     })
 
     connection.receiver.speaking.on('end', (id) => {
         if (target && id !== target.user?.id) return
-        handleSpeakingEnd(interaction, id)
+        handleSpeakingEnd(id, interaction)
     })
 
     await interaction.reply({ content: 'diu-da-da-diu-bau!', ephemeral: true })
