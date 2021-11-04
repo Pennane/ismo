@@ -21,8 +21,6 @@ export default async function (interaction: Discord.CommandInteraction<Discord.C
 
     storedIsmoConnection?.connection.receiver.speaking.removeAllListeners()
 
-    await interaction.reply({ content: 'diu-da-da-diu-bau!', ephemeral: true })
-
     const voiceChannel = (interaction.member as Discord.GuildMember).voice.channel
 
     if (!voiceChannel) {
@@ -34,6 +32,8 @@ export default async function (interaction: Discord.CommandInteraction<Discord.C
         await interaction.reply({ content: 'sin-ne--en--lii-ty!', ephemeral: true })
         return
     }
+
+    await interaction.reply({ content: 'diu-da-da-diu-bau!', ephemeral: true })
 
     const player = createAudioPlayer()
 
