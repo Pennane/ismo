@@ -17,7 +17,7 @@ export const handleSpeakingStart = (id: string, interaction: Discord.CommandInte
     }
 
     const resource = createAudioResource(soundfile, { inlineVolume: true })
-    resource.volume?.setVolume(4)
+    resource.volume?.setVolume(3)
 
     ismoConnection.player.play(resource)
     ismoConnection.speakingMap.set(id, true)
