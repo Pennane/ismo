@@ -19,8 +19,6 @@ export default async function (interaction: Discord.CommandInteraction<Discord.C
         return
     }
 
-    storedIsmoConnection?.connection.receiver.speaking.removeAllListeners()
-
     const voiceChannel = (interaction.member as Discord.GuildMember).voice.channel
 
     if (!voiceChannel) {
@@ -32,8 +30,6 @@ export default async function (interaction: Discord.CommandInteraction<Discord.C
         await interaction.reply({ content: 'sin-ne--en--lii-ty!', ephemeral: true })
         return
     }
-
-    await interaction.reply({ content: 'diu-da-da-diu-bau!', ephemeral: true })
 
     const player = createAudioPlayer()
 
@@ -48,6 +44,7 @@ export default async function (interaction: Discord.CommandInteraction<Discord.C
     const speakingMap: Map<string, boolean> = new Map()
 
     // Reset the ismoconnection every execution of the slash command
+    storedIsmoConnection?.connection.receiver.speaking.removeAllListeners()
     ismoConnections.set(interaction.guild.id, { connection, speakingMap, player })
 
     const target = interaction.options.get('kohde')
@@ -61,4 +58,6 @@ export default async function (interaction: Discord.CommandInteraction<Discord.C
         if (target && id !== target.user?.id) return
         handleEnd(interaction, id)
     })
+
+    await interaction.reply({ content: 'diu-da-da-diu-bau!', ephemeral: true })
 }
