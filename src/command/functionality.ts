@@ -1,7 +1,7 @@
 import Discord from 'discord.js'
 import { joinVoiceChannel, createAudioPlayer } from '@discordjs/voice'
 import { ismoConnections } from '../storage'
-import { handleStart, handleEnd } from './eventHandle'
+import { handleSpeakingStart, handleSpeakingEnd } from './eventHandle'
 
 export default async function (interaction: Discord.CommandInteraction<Discord.CacheType>) {
     if (!interaction.guild) return
@@ -51,12 +51,12 @@ export default async function (interaction: Discord.CommandInteraction<Discord.C
 
     connection.receiver.speaking.on('start', (id) => {
         if (target && id !== target.user?.id) return
-        handleStart(interaction, id)
+        handleSpeakingStart(interaction, id)
     })
 
     connection.receiver.speaking.on('end', (id) => {
         if (target && id !== target.user?.id) return
-        handleEnd(interaction, id)
+        handleSpeakingEnd(interaction, id)
     })
 
     await interaction.reply({ content: 'diu-da-da-diu-bau!', ephemeral: true })
